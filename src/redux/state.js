@@ -1,3 +1,8 @@
+const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST'
+const UPDATE_TEXT_MESSAGE = 'UPDATE-TEXT-MESSAGE'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+const ADD_POST = 'ADD-POST'
+
 let store = {
     _state: {
         dialogsPage: {
@@ -49,34 +54,38 @@ let store = {
     getState() {
         return this._state
     },
-    addPost() {
-        this._state.profilePage.posts.push({
-            id: this._state.profilePage.posts.length++,
-            post: this._state.textPost,
-            likesCount: 0
-        })
-        this._state.textPost = ''
+    dispatch(action) {
+        if (action.type === ADD_POST) {
+            this._state.profilePage.posts.push({
+                id: this._state.profilePage.posts.length++,
+                post: this._state.textPost,
+                likesCount: 0
+            })
+            this._state.textPost = ''
+        } else if (action.type === SEND_MESSAGE) {
+            this._state.dialogsPage.messages.push({
+                id: this._state.dialogsPage.messages.length++,
+                message: this._state.textMessage
+            })
+            this._state.textMessage = ''
+
+        } else if (action.type === UPDATE_TEXT_POST) {
+            this._state.textPost = action.textPost
+            this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_TEXT_MESSAGE) {
+            this._state.textMessage = action.textMessage
+        }
         this._callSubscriber(this._state)
     },
-    sendMessage() {
-        this._state.dialogsPage.messages.push({
-            id: this._state.dialogsPage.messages.length++,
-            message: this._state.textMessage
-        })
-        this._state.textMessage = ''
-        this._callSubscriber(this._state)
-    },
-    updateTextPost(textPost) {
-        this._state.textPost = textPost
-        this._callSubscriber(this._state)
-    },
-    updateTextMessage(textMessage) {
-        debugger
-        this._state.textMessage = textMessage
-        this._callSubscriber(this._state)
-    },
+
     subscribe(observer) {
         this._callSubscriber = observer
     },
 }
+
+export let addPostActionCreator = () => ({type: ADD_POST})
+export let sendMessageActionCreator = () => ({type: SEND_MESSAGE})
+export let updateTextMessageActionCreator = (text) => ({type: UPDATE_TEXT_MESSAGE, textMessage: text})
+export let updateTextPostActionCreator = (text) => ({type: UPDATE_TEXT_POST, textPost: text})
+
 export default store

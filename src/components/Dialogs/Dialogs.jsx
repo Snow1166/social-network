@@ -5,7 +5,7 @@ import SendMessage from "./SendMessage";
 
 const Dialogs = (props) => {
 
-    let dialogsElement = props.state.dialogsPage.dialogs.map(el => <DialogItem id={el.id} name={el.name} />)
+    let dialogsElement = props.state.dialogsPage.dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
     let messagesElement = props.state.dialogsPage.messages.map(el => <Message message={el.message}/>)
 
     return (
@@ -15,12 +15,13 @@ const Dialogs = (props) => {
                     {dialogsElement}
                 </div>
             </div>
-            <div className={s.messages}>
-                <SendMessage sendMessage={props.sendMessage}
-                             updateTextMessage={props.updateTextMessage}
-                             state={props.state}
-                />
-                {messagesElement}
+            <div>
+                <div className={s.messages}>
+                    {messagesElement}
+                </div>
+                <div>
+                    <SendMessage dispatch={props.dispatch} state={props.state}/>
+                </div>
             </div>
         </div>
     )
