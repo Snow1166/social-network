@@ -1,0 +1,11 @@
+.header img {
+    width: 87px;
+}
+.header {
+    width: 1000px;
+    background-color: indigo;
+    grid-area: header;
+}
+
+
+

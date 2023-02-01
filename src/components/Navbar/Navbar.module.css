@@ -1,0 +1,23 @@
+
+
+.navbar {
+    grid-area: nav;
+    width: 160px;
+    background-color: blueviolet;
+    padding: 20px;
+}
+
+.active {
+    color: indigo;
+    text-decoration: none;
+}
+
+.item {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+
+.sideBar {
+    padding: 50px;
+}
