@@ -3,8 +3,7 @@ import {NavLink} from "react-router-dom";
 import SideBar from "./sideBar/sideBar";
 
 const Navbar = (props) => {
-
-    let sideBar = props.state.siteBar.map(el => <SideBar ava={el.ava} name={el.name}/>)
+    let sideBar = props.siteBar.map(el => <SideBar ava={el.ava} name={el.name}/>)
     return (
         <nav className={s.navbar}>
             <div className={s.navItems} >

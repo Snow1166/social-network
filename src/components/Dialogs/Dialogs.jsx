@@ -1,12 +1,17 @@
 import s from './Dialogs.module.css'
 import Message from "./Message/Message";
 import DialogItem from "./Dialog/DialogItem";
-import SendMessage from "./SendMessage";
+import React from "react";
 
 const Dialogs = (props) => {
+    let dialogsElement = props.dialogsPage.dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
+    let messagesElement = props.dialogsPage.messages.map(el => <Message message={el.message}/>)
 
-    let dialogsElement = props.state.dialogsPage.dialogs.map(el => <DialogItem id={el.id} name={el.name}/>)
-    let messagesElement = props.state.dialogsPage.messages.map(el => <Message message={el.message}/>)
+    let newMessage = React.createRef();
+
+    let updateTextMessage = () => props.updateTextMessage(newMessage.current.value)
+
+    let onSendMessageClick = () => props.onSendMessageClick()
 
     return (
         <div className={s.dialogs}>
@@ -20,7 +25,12 @@ const Dialogs = (props) => {
                     {messagesElement}
                 </div>
                 <div>
-                    <SendMessage dispatch={props.dispatch} state={props.state}/>
+                    <div>
+                        <textarea ref={newMessage} value={props.dialogsPage.textNewMessage} onChange={updateTextMessage} placeholder={'Enter your massage'} name="" id="" cols="30" rows="5"/>
+                    </div>
+                    <div>
+                        <button onClick={onSendMessageClick}>send message</button>
+                    </div>
                 </div>
             </div>
         </div>
