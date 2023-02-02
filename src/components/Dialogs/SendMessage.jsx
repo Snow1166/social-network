@@ -1,5 +1,5 @@
 import React from "react";
-import {sendMessageAction, updateTextMessageAction} from '../../redux/dialogs-reduser'
+import {sendMessageAction, updateTextMessageAction} from '../../redux/dialogs-reducer'
 
 const SendMessage = (props) => {
 
