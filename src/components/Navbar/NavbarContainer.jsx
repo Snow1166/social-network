@@ -1,10 +1,13 @@
 import Navbar from "./Navbar";
+import {connect} from "react-redux";
 
-const NavbarContainer = (props) => {
 
-    let state = props.store.getState().navBarPage.siteBar
+let mapStateToProps = (state) => {
+    return {
+        siteBar: state.navBarPage.siteBar
+    }
+}
 
-    return <Navbar siteBar={state}/>
-};
+const NavbarContainer = connect(mapStateToProps)(Navbar)
 
 export default NavbarContainer;
