@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import SideBar from "./sideBar/sideBar";
 
 const Navbar = (props) => {
-    let sideBar = props.siteBar.map(el => <SideBar ava={el.ava} name={el.name}/>)
+    let sideBar = props.siteBar.map(el => <SideBar key={el.id} ava={el.ava} name={el.name}/>)
     return (
         <nav className={s.navbar}>
             <div className={s.navItems} >
@@ -20,6 +20,10 @@ const Navbar = (props) => {
                 </div>
                 <div className={s.item}>
                     <NavLink to="/music" className={navActive => navActive.isActive ? s.active : s.item}>Music</NavLink>
+                </div>
+                <div className={s.item}>
+                    <NavLink to='/users'
+                             className={navActive => navActive.isActive ? s.active : s.item}>Users</NavLink>
                 </div>
                 <div className={s.item}>
                     <NavLink to="/settings"
