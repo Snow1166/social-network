@@ -1,11 +1,13 @@
-import Dialogs from "../Dialogs";
-import {sendMessageAction, updateTextMessageAction} from "../../../redux/dialogs-reducer";
+import Dialogs from "./Dialogs";
+import {sendMessageAction, updateTextMessageAction} from "../../redux/dialogs-reducer";
 import {connect} from "react-redux";
 
 
 let mapStateToProps = (state) => {
     return{
-        dialogsPage: state.dialogsPage
+        dialogs: state.dialogsPage.dialogs,
+        messages: state.dialogsPage.messages,
+        textNewMessage: state.dialogsPage.textNewMessage
     }
 }
 let mapDispatchToProps = (dispatch) => {

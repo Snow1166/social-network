@@ -1,15 +1,24 @@
+import {current} from "@reduxjs/toolkit";
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 let initialState = {
-users:[]
+    users: [],
+    currentPage: 1,
+    pageSize: 10,
+    totalUsersCount: 0,
+    isFetching: true
 }
 
 
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FOLLOW: {
+        case FOLLOW:
             return {
                 ...state, users: state.users.map(u => {
                     if (u.id === action.userId) {
@@ -18,7 +27,6 @@ const usersReducer = (state = initialState, action) => {
                     return u
                 })
             }
-        }
         case UNFOLLOW:
             return {
                 ...state, users: state.users.map(u => {
@@ -29,14 +37,23 @@ const usersReducer = (state = initialState, action) => {
                 })
             }
         case SET_USERS:
-            return {...state,users: [...state.users, ...action.users]}
+            return {...state, users: action.users,}
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.currentPage}
+        case SET_TOTAL_USERS_COUNT:
+            return {...state, totalUsersCount: action.totalUsersCount}
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching: action.isFetching}
         default:
             return state
-
     }
 }
 
-export let followAC = (userId) => ({type: FOLLOW, userId})
-export let unfollowAC = (userId) => ({type: UNFOLLOW, userId})
+export let follow = (userId) => ({type: FOLLOW, userId})
+export let unfollow = (userId) => ({type: UNFOLLOW, userId})
 export let setUsers = (users) => ({type: SET_USERS, users})
+export let setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage})
+export let setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
+export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching})
+
 export default usersReducer;
