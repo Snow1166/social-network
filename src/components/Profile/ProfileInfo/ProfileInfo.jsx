@@ -1,6 +1,11 @@
 import s from './ProfileInfo.module.css'
+import user from '../../../assets/images/user.png'
+import Preloader from "../../../common/Preloader/Preloader";
+
 
 const ProfileInfo = (props) => {
+
+
     return (
         <div>
             <div>
@@ -8,7 +13,7 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img
-                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3ikRkMJhd7rVJK1efVPD4T_6AOmwQ05F9Og&usqp=CAU"
+                    src={props.profile.photos ? props.profile.photos.large : user }
                     alt=""/>
                 description
             </div>

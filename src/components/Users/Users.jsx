@@ -1,24 +1,28 @@
 import style from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import React from "react";
+import {NavLink} from "react-router-dom";
 
 
 const Users = (props) => {
-    let totalPages = Math.ceil(props.totalUsersCount / props.pageSize)
+    // let totalPages = Math.ceil(props.totalUsersCount / props.pageSize)
     let pages = []
     for (let i = 1; i <= 10; i++) {  // i <= totalPages
         pages.push(i)
     }
 
-    return <div>
+    return (
         <div>
-            {pages.map(p => <span onClick={() => props.onPageChanged(p)}
-                                  className={props.currentPage === p && style.selectedPage}> {p} </span>)}
-        </div>
-        {props.users.map(u => <div key={u.id}>
+            <div>
+                {pages.map(p => <span key={p} onClick={() => props.onPageChanged(p)}
+                                      className={props.currentPage === p ? style.selectedPage : style.nonSelected}> {p} </span>)}
+            </div>
+            {props.users.map(u => <div key={u.id}>
         <span>
             <div>
-                <img className='ava' src={u.photos.small ? u.photos.small : userPhoto} alt=""/>
+                <NavLink to={'/profile/' + u.id}>
+                    <img className='ava' src={u.photos.small ? u.photos.small : userPhoto} alt=""/>
+                </NavLink>
             </div>
             <div>
                 {u.followed ?
@@ -26,7 +30,7 @@ const Users = (props) => {
                     <button onClick={() => props.follow(u.id)}>Follow</button>}
             </div>
         </span>
-            <span>
+                <span>
             <span>
                 <div>{u.name}</div>
                 <div>{u.status}</div>
@@ -36,8 +40,8 @@ const Users = (props) => {
                 <div>{'u.location.city'}</div>
             </span>
         </span>
-        </div>)}
-    </div>
+            </div>)}
+        </div>)
 }
 
 export default Users;
