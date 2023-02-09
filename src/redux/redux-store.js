@@ -3,6 +3,7 @@ import dialogReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer from "./users-reducer";
+import authReducer from "./auth-reducer";
 
 
 let rootReducer = combineReducers({
@@ -10,6 +11,7 @@ let rootReducer = combineReducers({
     usersPage: usersReducer,
     dialogsPage: dialogReducer,
     navBarPage: sidebarReducer,
+    auth: authReducer,
 })
 
 

@@ -4,6 +4,9 @@ import Preloader from "../../../common/Preloader/Preloader";
 
 
 const ProfileInfo = (props) => {
+    if (!props.profile) {
+        return <Preloader/>
+    }
 
 
     return (
@@ -13,9 +16,21 @@ const ProfileInfo = (props) => {
             </div>
             <div className={s.descriptionBlock}>
                 <img
-                    src={props.profile.photos ? props.profile.photos.large : user }
+                    src={props.profile.photos.large ? props.profile.photos.large : user}
+                    // src={ user}
                     alt=""/>
-                description
+                <div>
+                    <h2>{props.profile.fullName}</h2>
+                    <h3>{props.profile.aboutMe}</h3>
+                    <ul>
+                        <li>{props.profile.contacts.facebook}</li>
+                        <li>{props.profile.contacts.website}</li>
+                        <li>{props.profile.contacts.vk}</li>
+                        <li>{props.profile.contacts.twitter}</li>
+
+                    </ul>
+                    <p>{props.profile.lookingForAJobDescription}</p>
+                </div>
             </div>
         </div>
     )

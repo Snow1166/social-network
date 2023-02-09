@@ -7,5 +7,10 @@
     grid-area: header;
 }
 
+.loginBlock{
+    float: right;
+}
 
-
+.loginBlock a{
+    color: white;
+}
