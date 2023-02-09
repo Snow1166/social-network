@@ -15,22 +15,27 @@ const ProfileInfo = (props) => {
                 <img className={s.head} src="https://yahont-hotel.ru/ckeditor_images/chernomorskoje_vid.jpg" alt=""/>
             </div>
             <div className={s.descriptionBlock}>
-                <img
+                <span><img
                     src={props.profile.photos.large ? props.profile.photos.large : user}
-                    // src={ user}
                     alt=""/>
-                <div>
                     <h2>{props.profile.fullName}</h2>
-                    <h3>{props.profile.aboutMe}</h3>
+                    <h3>Обо мне: {props.profile.aboutMe}</h3>
+                    </span>
+                <span>
+                    <p>contacts:</p>
                     <ul>
-                        <li>{props.profile.contacts.facebook}</li>
-                        <li>{props.profile.contacts.website}</li>
-                        <li>{props.profile.contacts.vk}</li>
-                        <li>{props.profile.contacts.twitter}</li>
+                        <li>facebook: {props.profile.contacts.facebook ? props.profile.contacts.facebook : 'Не заполнено'}</li>
+                        <li>website: {props.profile.contacts.website ? props.profile.contacts.website :'Не заполнено'}</li>
+                        <li>vk: {props.profile.contacts.vk ? props.profile.contacts.vk : 'Не заполнено'}</li>
+                        <li>twitter: {props.profile.contacts.twitter ? props.profile.contacts.twitter : 'Не заполнено'}</li>
+                        <li>instagram: {props.profile.contacts.instagram ? props.profile.contacts.instagram : 'Не заполнено'}</li>
+                        <li>youtube: {props.profile.contacts.youtube ? props.profile.contacts.youtube: 'Не заполнено'}</li>
+                        <li>github: {props.profile.contacts.github ? props.profile.contacts.github : 'Не заполнено'}</li>
+                        <li>mainLink: {props.profile.contacts.mainLink ? props.profile.contacts.mainLink :'Не заполнено'}</li>
 
                     </ul>
-                    <p>{props.profile.lookingForAJobDescription}</p>
-                </div>
+                    <p>Ищу работу: {props.profile.lookingForAJobDescription ? props.profile.lookingForAJobDescription: 'Не заполнено'}</p>
+                    </span>
             </div>
         </div>
     )

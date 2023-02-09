@@ -2,6 +2,7 @@ import style from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import {api} from "../../api/api";
 
 
 const Users = (props) => {
@@ -25,9 +26,22 @@ const Users = (props) => {
                 </NavLink>
             </div>
             <div>
-                {u.followed ?
-                    <button onClick={() => props.unfollow(u.id)}>Unfollow</button> :
-                    <button onClick={() => props.follow(u.id)}>Follow</button>}
+                {u.followed
+                    ? <button onClick={() => {
+                        api.unfollow(u.id).then(response => {
+                            if (response === 0) {
+                                props.unfollow(u.id)
+                            }
+                        })
+                        props.unfollow(u.id)
+                    }}>Unfollow</button>
+                    : <button onClick={() => {
+                        api.follow(u.id).then(response => {
+                            if (response === 0) {
+                                props.follow(u.id)
+                            }
+                        })
+                    }}>Follow</button>}
             </div>
         </span>
                 <span>
