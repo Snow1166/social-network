@@ -8,6 +8,7 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileConteiner";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/Login/Login";
 
 
 const App = (props) => {
@@ -23,6 +24,7 @@ const App = (props) => {
                     <Route path='/news/*' element={<News/>}/>
                     <Route path='/users/*' element={<UsersContainer />}/>
                     <Route path='/settings/*' element={<Settings/>}/>
+                    <Route path='/login/*' element={<Login/>}/>
                 </Routes>
             </div>
         </div>
