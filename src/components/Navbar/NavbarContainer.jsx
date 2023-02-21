@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        siteBar: state.navBarPage.siteBar
+        siteBar: state.navBarPage.siteBar,
+        myId: state.auth.userId
     }
 }
 
