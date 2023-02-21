@@ -1,6 +1,5 @@
 import {authAPI, profileAPI} from "../api/usersAPI";
 
-const UPDATE_TEXT_POST = 'UPDATE-TEXT-POST'
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
@@ -12,7 +11,6 @@ let initialState = {
         {id: 2, post: 'Н///Й такую работу', likesCount: 150},
         {id: 3, post: 'post', likesCount: 3},
     ],
-    textNewPost: '',
     profile: null,
     profileStatus: '',
     captchaUlr: ''
@@ -24,15 +22,9 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: [...state.posts, {
                     id: state.posts.length++,
-                    post: state.textNewPost,
+                    post: action.textPost,
                     likesCount: 0
                 }],
-                textNewPost: ''
-            }
-        case UPDATE_TEXT_POST:
-            return {
-                ...state,
-                textNewPost: action.textNewPost
             }
         case SET_USER_PROFILE:
             return {
@@ -54,8 +46,7 @@ const profileReducer = (state = initialState, action) => {
     }
 }
 
-export let addPostAction = () => ({type: ADD_POST})
-export let updateTextPostAction = (text) => ({type: UPDATE_TEXT_POST, textNewPost: text})
+export let addPost = (textPost) => ({type: ADD_POST, textPost})
 let setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 const setStatus = (status) => ({type: SET_STATUS, status})
 const setCaptcha = (urlCaptcha) => ({type: SET_CAPTCHA, urlCaptcha})
