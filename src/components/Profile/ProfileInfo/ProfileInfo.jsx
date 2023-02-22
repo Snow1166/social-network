@@ -1,4 +1,4 @@
-import s from './ProfileInfo.module.css'
+import style from './ProfileInfo.module.css'
 import user from '../../../assets/images/user.png'
 import Preloader from "../../../common/Preloader/Preloader";
 import ProfileStatus from "../ProfileStatus/ProfileStatus";
@@ -13,9 +13,9 @@ const ProfileInfo = (props) => {
     return (
         <div>
             <div>
-                <img className={s.head} src="https://yahont-hotel.ru/ckeditor_images/chernomorskoje_vid.jpg" alt=""/>
+                <img className={style.head} src="https://yahont-hotel.ru/ckeditor_images/chernomorskoje_vid.jpg" alt=""/>
             </div>
-            <div className={s.descriptionBlock}>
+            <div className={style.descriptionBlock}>
                 <span><img
                     src={props.profile.photos.large ? props.profile.photos.large : user}
                     alt=""/>

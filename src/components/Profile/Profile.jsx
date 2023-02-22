@@ -1,4 +1,4 @@
-import style from './Profile.module.css'
+import styles from './Profile.module.css'
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./Posts/MyPostsContainer";
 import React from "react";

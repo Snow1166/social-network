@@ -9,3 +9,7 @@ img {
 .descriptionBlock {
     padding: 10px;
 }
+
+.descriptionBlock img{
+    height: 300px;
+}

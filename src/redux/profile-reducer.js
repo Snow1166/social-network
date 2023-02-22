@@ -1,9 +1,8 @@
-import {authAPI, profileAPI} from "../api/usersAPI";
+import {profileAPI} from "../api/usersAPI";
 
 const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
-const SET_CAPTCHA = 'SET_CAPTCHA'
 
 let initialState = {
     posts: [
@@ -36,11 +35,6 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profileStatus: action.status
             }
-        case SET_CAPTCHA:
-            return {
-                ...state,
-                captchaUlr: action.urlCaptcha
-            }
         default:
             return state
     }
@@ -49,11 +43,10 @@ const profileReducer = (state = initialState, action) => {
 export let addPost = (textPost) => ({type: ADD_POST, textPost})
 let setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
 const setStatus = (status) => ({type: SET_STATUS, status})
-const setCaptcha = (urlCaptcha) => ({type: SET_CAPTCHA, urlCaptcha})
+
 
 export const getProfile = (userId) => dispatch => {
-    let currentUserId = userId ? userId : 2
-    profileAPI.getProfile(currentUserId).then(response => {
+    return profileAPI.getProfile(userId).then(response => {
         dispatch(setUserProfile(response))
     })
 }
@@ -73,20 +66,6 @@ export const updateStatus = (status) => dispatch => {
     })
 }
 
-export const login = (loginForm) => dispatch => {
-    authAPI.login(loginForm).then(response => {
-    })
-}
 
-export const logout = () => dispatch => {
-    authAPI.logout().then(response => {
-    })
-}
-
-export const getCaptcha = () => dispatch => {
-    authAPI.getCaptcha().then(response => {
-        dispatch(setCaptcha(response.data))
-    })
-}
 
 export default profileReducer;

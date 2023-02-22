@@ -1,7 +1,7 @@
 import Login from "./Login";
 import {compose} from "redux";
 import {connect} from "react-redux";
-import {logout, login, getCaptcha} from "../../redux/profile-reducer";
+import {logout, login, getCaptcha} from "../../redux/auth-reducer";
 
 const LoginContainer =(props) => {
     return <Login isAuth={props.isAuth} login={props.login} logout={props.logout} getCaptcha={props.getCaptcha}/>
