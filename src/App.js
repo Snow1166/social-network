@@ -8,24 +8,23 @@ import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileConteiner";
 import HeaderContainer from "./components/Header/HeaderContainer";
-import Login from "./components/Login/Login";
 import LoginContainer from "./components/Login/LoginContainer";
-import {Component} from "react";
-import {connect} from "react-redux";
+import {useEffect} from "react";
+import {connect, Provider} from "react-redux";
 import {initializedApp} from "./redux/app-reducer";
 import Preloader from "./common/Preloader/Preloader";
+import store from "./redux/redux-store";
 
 
-class App extends Component {
-    componentDidMount() {
-        this.props.initializedApp()
+const App = (props) => {
+    useEffect(() => {
+        props.initializedApp()
+    })
+    if (!props.initialized) {
+        return <Preloader/>
     }
-
-    render() {
-        if (!this.props.initialized) {
-            return <Preloader/>
-        }
-        return (
+    return (
+        <Provider store={store}>
             <div className="app-wrapper">
                 <HeaderContainer/>
                 <NavbarContainer/>
@@ -41,8 +40,8 @@ class App extends Component {
                     </Routes>
                 </div>
             </div>
-        );
-    }
+        </Provider>
+    );
 }
 
 const mapStateToProps = (state) => ({

@@ -29,43 +29,47 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-
-export let setAuthUserData = (userId, email, login, isAuth) => ({type: SET_USER_DATA, payload: {userId, email, login, isAuth}})
-
-export let getAuthUserData = () => (dispatch) => {
-    return api.auth().then(response => {
-        if (response.data.resultCode === 0) {
-            let {id, email, login  } = response.data.data
-            let isAuth = true
-            dispatch(setAuthUserData(id, email, login, isAuth))
-        }
-    })
-}
-
 const setCaptcha = (urlCaptcha) => ({type: SET_CAPTCHA, urlCaptcha})
 
-export const login = (loginForm) => dispatch => {
-    authAPI.login(loginForm).then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(getAuthUserData())
-        } else {
-            let messagesError = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
-            let action = stopSubmit('login', {_error: messagesError});
-            dispatch(action);
-        }
-    })
+export let setAuthUserData = (userId, email, login, isAuth) => ({
+    type: SET_USER_DATA,
+    payload: {userId, email, login, isAuth}
+})
+
+export let getAuthUserData = () => async (dispatch) => {
+    let response = await api.auth()
+    if (response.data.resultCode === 0) {
+        let {id, email, login} = response.data.data
+        let isAuth = true
+        dispatch(setAuthUserData(id, email, login, isAuth))
+        return response
+    }
 }
 
-export const logout = () => dispatch => {
-    authAPI.logout().then(response => {
+export const login = (loginForm) => async (dispatch) => {
+    let response = await authAPI.login(loginForm)
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserData())
+    } else {
+        let messagesError = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+        let action = stopSubmit('login', {_error: messagesError});
+        dispatch(action);
+    }
+}
+
+export const logout = () => async (dispatch) => {
+    let response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
         dispatch(setAuthUserData(null, null, null, false))
-    })
+    }
 }
 
-export const getCaptcha = () => dispatch => {
-    authAPI.getCaptcha().then(response => {
+
+export const getCaptcha = () => async (dispatch) => {
+    let response = await authAPI.getCaptcha()
+    if (response.data.resultCode === 0) {
         dispatch(setCaptcha(response.data))
-    })
+    }
 }
 
 export default authReducer;

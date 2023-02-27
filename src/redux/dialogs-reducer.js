@@ -21,7 +21,7 @@ const dialogReducer = (state = initialState, action) => {
             return {
                 ...state,
                 messages: [...state.messages, {
-                    id: state.messages.length++,
+                    id: ++state.messages.length,
                     message: action.textNewMessage
                 }],
             }

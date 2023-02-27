@@ -1,52 +1,39 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 
-class ProfileStatus extends React.Component {
+const ProfileStatus = (props) => {
 
-    state = {
-        editMode: false,
-        status: this.props.status
+    const [editMode, setEditMode] = useState(false)
+    const [status, setStatus] = useState(props.status)
+
+    const activateMethodMode = () => {
+        setEditMode(true)
     }
 
-    activateMethodMode = () => {
-        this.setState(
-            {editMode: true,
-            }
-        )
+    const deactivateMethodMode = () => {
+
+        setEditMode(false);
+        props.updateStatus(status)
     }
 
-    deactivateMethodMode = (e) => {
-        this.setState(
-            {editMode: false}
-        )
-        this.props.updateStatus(this.state.status)
+    const onStatusChange = (e) => {
+        setStatus(e.currentTarget.value)
     }
 
-    onStatusChange = (e) => {
-        this.setState({
-            status: e.currentTarget.value
-        })
-    }
+    useEffect(() => {
+            setStatus(props.status)
+        }, [props.status]
+    )
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.status !== this.props.status) {
-            this.setState( {
-                status: this.props.status
-            })
+    return (<div>
+        {!editMode
+            ? <div>
+                <span onDoubleClick={activateMethodMode}>{props.status || 'Задать статус'}</span>
+            </div>
+            : <div>
+                <input onChange={onStatusChange} autoFocus={true} onBlur={deactivateMethodMode} value={status} type=""/>
+            </div>
         }
-    }
-
-    render() {
-        return (<div>
-            {!this.state.editMode
-                ? <div>
-                    <span onDoubleClick={()=> this.activateMethodMode()}>{this.props.status ||'Задать статус'}</span>
-                </div>
-                : <div>
-                    <input onChange={(e) => this.onStatusChange(e)} autoFocus={true} onBlur={() => this.deactivateMethodMode()} value={this.state.status} type=""/>
-                </div>
-            }
-        </div>)
-    }
+    </div>)
 }
 
 

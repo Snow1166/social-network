@@ -9,22 +9,24 @@ const maxLength30 = maxLengthCreator(30)
 
 const addPostForm = (props) => {
 
+
     return <form onSubmit={props.handleSubmit}>
         <Field name={'newPostBody'} component={ControlInputText} tag={'textarea'} placeholder={'Введите текст поста'} validate={[required, maxLength30]}/>
-        <button>Add post</button>
+        <button>Add post </button>
     </form>
 }
 
-const MyPosts = (props) => {
-
+const MyPosts = React.memo(props => {
     const postsElement = props.profilePage.posts.map((el) => <Post key={el.id} post={el.post} likesCount={el.likesCount}/>)
 
 
     const addPost = (value) => {
         props.addPost(value.newPostBody)
+
     }
 
     return (
+
         <div className={style.postBlock}>
             <h3>My post</h3>
             <p>new post</p>
@@ -35,7 +37,7 @@ const MyPosts = (props) => {
             {postsElement}
         </div>
     )
-}
+})
 
 const PostReduxForm = reduxForm({form: 'postsAddPostForm'})(addPostForm)
 
