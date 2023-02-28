@@ -10,7 +10,7 @@ const News = (props) => {
     useEffect (() => {
         document.title = `Вы нажали ${count} раз`;
     })
-    // const photo = 'https://i.ibb.co/Xy79jNM/IMG-1850.jpg'!
+
 
 
     const sendPhoto = () => {

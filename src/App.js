@@ -2,14 +2,14 @@ import './App.css';
 import Music from "./components/Music/Music";
 import News from "./components/News/News";
 import Settings from "./components/Settings/Settings";
-import {Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileConteiner";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {connect, Provider} from "react-redux";
 import {initializedApp} from "./redux/app-reducer";
 import Preloader from "./common/Preloader/Preloader";
@@ -21,7 +21,7 @@ const App = (props) => {
         props.initializedApp()
     })
     if (!props.initialized) {
-        return <Preloader/>
+        return <Preloader />
     }
     return (
         <Provider store={store}>
@@ -47,4 +47,18 @@ const App = (props) => {
 const mapStateToProps = (state) => ({
     initialized: state.appPage.initialized
 })
-export default connect(mapStateToProps, {initializedApp})(App);
+
+const AppContainer = connect(mapStateToProps, {initializedApp})(App);
+
+
+const MainApp = () => {
+    return (
+        <BrowserRouter>
+            <Provider store={store}>
+                <AppContainer/>
+            </Provider>
+        </BrowserRouter>
+    )
+}
+
+export default MainApp
