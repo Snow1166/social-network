@@ -3,5 +3,8 @@
 }
 
 .nonSelected {
+}
 
+.paginator span{
+ border: 1px solid gray;
 }
